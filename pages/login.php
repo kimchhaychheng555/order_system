@@ -42,6 +42,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <?php $appFunction->loadingScreen(); ?>
+
+
+
+
     <div class="login-dark">
         <form method="POST">
             <div class="illustration"><i class="fal fa-lock"></i></div>

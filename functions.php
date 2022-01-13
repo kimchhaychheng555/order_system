@@ -1,6 +1,7 @@
 <?php
 class ApplicationFunction
 {
+
     function checkCurrentLoginUser()
     {
         include('config.php');
@@ -107,15 +108,24 @@ class ApplicationFunction
     function restoreDatabase()
     {
 
-        include('config.php');
+        // include('config.php');
 
-        $restore_file  = "C:/Users/Da/Downloads/_backup_1641909955.sql";
-        $server_name   = $dbServerName;
-        $username      = $dbUsername;
-        $password      = $dbPassword;
-        $database_name = $dbDatabase;
+        // $restore_file  = "C:/Users/Da/Downloads/_backup_1641909955.sql";
+        // $server_name   = $dbServerName;
+        // $username      = $dbUsername;
+        // $password      = $dbPassword;
+        // $database_name = $dbDatabase;
 
-        $cmd = "mysql -h {$server_name} -u {$username} -p{$password} {$database_name} < $restore_file";
-        exec($cmd);
+        // $cmd = "mysql -h {$server_name} -u {$username} -p{$password} {$database_name} < $restore_file";
+        // exec($cmd);
+    }
+
+    function loadingScreen()
+    {
+        echo '<div class="wrap-spinner">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>';
     }
 }

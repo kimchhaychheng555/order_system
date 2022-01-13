@@ -5,5 +5,3 @@ include('../functions.php');
 
 $appFunction = new ApplicationFunction();
 $result = $appFunction->checkCurrentLoginUser();
-
-$appFunction->backupDatabase();
