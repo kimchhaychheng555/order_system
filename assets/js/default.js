@@ -10,9 +10,21 @@ $(document).ready(function () {
 });
 
 function UI_Slider_Toggle() {
-    if ($("#ui_sidebar").width() > 0) {
-        $("#ui_sidebar").animate({ width: 0 }, 500);
+    if ($(window).width() < 992) {
+        if ($("#ui_sidebar").width() > 0) {
+            $("#avatar_logo").show();
+            $("#ui_sidebar").animate({ width: 0 }, 500);
+        } else {
+            $("#avatar_logo").show();
+            $("#ui_sidebar").animate({ width: 260 }, 500);
+        }
     } else {
-        $("#ui_sidebar").animate({ width: 260 }, 500);
+        if ($("#ui_sidebar").width() > 50) {
+            $("#avatar_logo").hide();
+            $("#ui_sidebar").animate({ width: 50 }, 500);
+        } else {
+            $("#avatar_logo").show();
+            $("#ui_sidebar").animate({ width: 260 }, 500);
+        }
     }
 }
