@@ -47,7 +47,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 
 
-
     <div class="login-dark">
         <form method="POST">
             <div class="illustration"><i class="fal fa-lock"></i></div>
@@ -62,6 +61,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         </form>
     </div>
 
+
+
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/default.js"></script>
 </body>
 
 </html>

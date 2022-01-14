@@ -51,7 +51,9 @@
 }
 
 /* End Scroll Custome */
-
+.cursor-pointer{
+    cursor: pointer;
+}
 
 html, body{
     width: 100%;
@@ -81,8 +83,15 @@ h1, h2, h3, h4, h5, h6 {
 .wrap-main {
     height: calc(100% - 50px);
     width: 100%;
+    display: flex;
+    
 }
 
 .app-bar-name {
     margin-left: 1rem;
+}
+
+.wrap-content-main {
+    padding: 1rem;
+    width: calc(100% - 260px);
 }

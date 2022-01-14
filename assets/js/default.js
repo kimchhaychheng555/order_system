@@ -1,14 +1,18 @@
-require('jquery-3.6.0.min.js');
-require('bootstrap/bootstrap.min.js');
-require('bootstrap/bootstrap.bundle.min.js');
-
 $(window).on("load", function () {
     $(".wrap-spinner").delay(200).fadeOut(100);
 })
 
 
 $(document).ready(function () {
-    $("#btn_toggle_sidebar").toggle(function () {
-        $("#ui_sidebar").toggle();
+    $("#btn_toggle_sidebar").click(function () {
+        UI_Slider_Toggle();
     });
 });
+
+function UI_Slider_Toggle() {
+    if ($("#ui_sidebar").width() > 0) {
+        $("#ui_sidebar").animate({ width: 0 }, 500);
+    } else {
+        $("#ui_sidebar").animate({ width: 260 }, 500);
+    }
+}
