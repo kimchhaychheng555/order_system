@@ -16,8 +16,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $result = $dbConn->query($query);
 
     if ($result->num_rows > 0) {
-        $_SESSION["username"] = $username;
-        $_SESSION["password"] = $password;
+        while ($row = $result->fetch_assoc()) {
+            $_SESSION["username"] = $row['username'];
+            $_SESSION["password"] = $row['password'];
+            $_SESSION["fullname"] = $row['fullname'];
+            $_SESSION["image"] = $row['image'];;
+            break;
+        }
         header("Location: sale.php");
     } else {
         header("Location: login.php");

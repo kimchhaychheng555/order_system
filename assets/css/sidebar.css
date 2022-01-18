@@ -9,7 +9,7 @@ li {
     color: white;
     position: static;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
     @media (max-width: 992px) {
@@ -70,7 +70,9 @@ li {
         margin-right: 1rem;
         font-size: 20px;
     }
-
+#btn_toggle_sidebar {
+    line-height: 1 !important;
+}
 
 
 

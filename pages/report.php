@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +10,7 @@
 
 <body>
     <div class="wrap-main-header justify-content-between">
-        <div class="left-side d-flex align-item-center">
+        <div class="left-side d-flex align-items-center">
             <span id="btn_toggle_sidebar" class="cursor-pointer"><i class="far fa-bars"></i></span>
             <h6 class="app-bar-name">Dashboard</h6>
         </div>
@@ -24,33 +23,22 @@
         <div class="sidebar" id="ui_sidebar">
             <div class="avatar_wrap" id="avatar_wrap">
                 <div class="avatar_logo">
-                    <img src="../images/no_image.png">
+                    <img src="<?php echo $_SESSION['image'] ?>">
                 </div>
-                <h6 class="mt-2">Chhay Low</h6>
+                <h6 class="mt-2"><?php echo $_SESSION['fullname'] ?></h6>
             </div>
-            <div class="menu-sidebar-wrap">
-                <a href="" class="menu-a-link active">
-                    <i class="far fa-chart-line"></i>
-                    <li>
-                        Dashboard
-                    </li>
-                </a>
-                <a href="" class="menu-a-link">
-                    <i class="far fa-chart-line"></i>
-                    <li>
-                        Dashboard
-                    </li>
-                </a>
-                <a href="" class="menu-a-link">
-                    <i class="far fa-chart-line"></i>
-                    <li>
-                        Dashboard
-                    </li>
-                </a>
-            </div>
+            <?php
+            include("../menu-sidebar.php");
+            ?>
         </div>
         <div class="wrap-content-main">
-            <h1>Hello</h1>
+
+            <!-- Your Code Here -->
+
+
+
+            <!-- End Code Here -->
+
         </div>
 
     </div>
