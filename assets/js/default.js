@@ -12,18 +12,18 @@ $(document).ready(function () {
 function UI_Slider_Toggle() {
     if ($(window).width() < 992) {
         if ($("#ui_sidebar").width() > 0) {
-            $("#avatar_logo").show();
+            $("#avatar_wrap").show();
             $("#ui_sidebar").animate({ width: 0 }, 500);
         } else {
-            $("#avatar_logo").show();
+            $("#avatar_wrap").show();
             $("#ui_sidebar").animate({ width: 260 }, 500);
         }
     } else {
         if ($("#ui_sidebar").width() > 50) {
-            $("#avatar_logo").hide();
+            $("#avatar_wrap").hide();
             $("#ui_sidebar").animate({ width: 50 }, 500);
         } else {
-            $("#avatar_logo").show();
+            $("#avatar_wrap").show();
             $("#ui_sidebar").animate({ width: 260 }, 500);
         }
     }
