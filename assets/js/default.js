@@ -22,6 +22,7 @@ function UI_Slider_Toggle() {
         if ($("#ui_sidebar").width() > 50) {
             $("#avatar_wrap").hide();
             $("#ui_sidebar").animate({ width: 50 }, 500);
+            $(".wrap-content-main").width($(window).width() - 50);
         } else {
             $("#avatar_wrap").show();
             $("#ui_sidebar").animate({ width: 260 }, 500);

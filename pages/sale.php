@@ -5,6 +5,7 @@ include('../functions.php');
 
 $appFunction = new ApplicationFunction();
 $result = $appFunction->checkCurrentLoginUser();
+
 ?>
 
 
@@ -16,6 +17,7 @@ $result = $appFunction->checkCurrentLoginUser();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../assets/css/default.css">
+    <link rel="stylesheet" href="../assets/css/sale.css">
 </head>
 
 <body>
@@ -33,7 +35,8 @@ $result = $appFunction->checkCurrentLoginUser();
         <div class="sidebar" id="ui_sidebar">
             <div class="avatar_wrap" id="avatar_wrap">
                 <div class="avatar_logo">
-                    <img src="<?php echo $_SESSION['image'] ?>">
+                    <img
+                        src="<?php echo empty($_SESSION['image']) ? '../images/no_image.png' :  $_SESSION['image']; ?>">
                 </div>
                 <h6 class="mt-2"><?php echo $_SESSION['fullname'] ?></h6>
             </div>
@@ -45,7 +48,36 @@ $result = $appFunction->checkCurrentLoginUser();
 
             <!-- Your Code Here -->
 
+            <div class="sale-wrap">
 
+                <div class="product-scroll-controller">
+                    <div class="product-wrap">
+
+                        <?php
+                        for ($i = 0; $i < 20; $i++) {
+                            echo '
+                        <div class="product">
+                            <div class="product-image">
+                                <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_33/2203981/171026-better-coffee-boost-se-329p.jpg"
+                                    alt="">
+                                <div class="product-price">
+                                    <h6>$120.00</h6>
+                                </div>
+                            </div>
+                            <div class="product-name">
+                                <h6>Coffee</h6>
+                            </div>
+                        </div>
+                        ';
+                        }
+                        ?>
+
+                    </div>
+                </div>
+                <div class="sale-order-wrap">
+
+                </div>
+            </div>
 
             <!-- End Code Here -->
 
