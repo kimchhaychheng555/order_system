@@ -54,28 +54,64 @@ $result = $appFunction->checkCurrentLoginUser();
                     <div class="product-wrap">
 
                         <?php
-                        for ($i = 0; $i < 20; $i++) {
-                            echo '
-                        <div class="product">
-                            <div class="product-image">
-                                <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_33/2203981/171026-better-coffee-boost-se-329p.jpg"
-                                    alt="">
-                                <div class="product-price">
-                                    <h6>$120.00</h6>
-                                </div>
-                            </div>
-                            <div class="product-name">
-                                <h6>Coffee</h6>
-                            </div>
-                        </div>
-                        ';
+
+                        $query = "SELECT id, product_name, product_price, product_image, is_deleted FROM data_product";
+                        $result =  $dbConn->query($query);
+                        // var_dump($result);
+                        if ($result->num_rows > 0) {
+                            include('../components.php');
+                            $appCom = new ApplicationComponent();
+
+                            while ($row = $result->fetch_assoc()) {
+                                $id = $row['id'];
+                                $product_name = $row['product_name'];
+                                $product_price = $row['product_price'];
+                                $product_image = $row['product_image'];
+
+                                $appCom->ComProductDisplay($id, $product_name, $product_price, $product_image);
+                            }
                         }
+
                         ?>
 
                     </div>
                 </div>
                 <div class="sale-order-wrap">
-
+                    <div class="sale-product-order">
+                        <div class="sale-order-item">
+                            <div class="sale-order-product-name">
+                                <h6>Coffee</h6>
+                                <p>price: $20.00</p>
+                            </div>
+                            <div class="sale-order-compute-qty">
+                                <i class="fal fa-plus-circle"></i>
+                                <div class="sale-order-price">
+                                    <h6>5</h6>
+                                </div>
+                                <i class="fal fa-minus-circle"></i>
+                            </div>
+                            <div class="sale-order-product-total-price">
+                                <h6>$ 100.00</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sale-order-summary">
+                        <div class="total-summary">
+                            <div class="data-summary">
+                                <span class="label">Quantity</span>
+                                <span class="label">5</span>
+                            </div>
+                            <div class="data-summary">
+                                <span class="label">Price</span>
+                                <span class="label">$100.00</span>
+                            </div>
+                            <div class="sale-order-action">
+                                <button class="btn btn-success">Submit Order</button>
+                                <div style="width: 10px;"></div>
+                                <button class="btn btn-info">Print</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -91,5 +127,6 @@ $result = $appFunction->checkCurrentLoginUser();
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/default.js"></script>
+<script src="../assets/js/sale.js"></script>
 
 </html>

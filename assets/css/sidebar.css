@@ -3,6 +3,7 @@ li {
     list-style-type: none;
 }
 .sidebar{
+    z-index: 1000;
     width: 260px;
     background-color: #24344b;
     height: 100%;
