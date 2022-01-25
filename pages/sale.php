@@ -53,14 +53,14 @@ $result = $appFunction->checkCurrentLoginUser();
             <div class="sale-wrap">
 
                 <div class="product-scroll-controller">
-                    <div class="product-wrap">
 
-                        <?php
+                    <?php
 
-                        $query = "SELECT id, product_name, product_price, product_image, is_deleted FROM data_product";
-                        $result =  $dbConn->query($query);
-                        // var_dump($result);
+                    $query = "SELECT id, product_name, product_price, product_image, is_deleted FROM data_product";
+                    $result =  $dbConn->query($query);
+                    if ($result) {
                         if ($result->num_rows > 0) {
+                            echo '<div class="product-wrap">';
                             include('../components.php');
                             $appCom = new ApplicationComponent();
 
@@ -72,11 +72,20 @@ $result = $appFunction->checkCurrentLoginUser();
 
                                 $appCom->ComProductDisplay($id, $product_name, $product_price, $product_image);
                             }
+                            echo '</div>';
                         }
+                    } else {
+                        echo '
+                        <div class="empty-data w-100 h-100">
+                            <div class="empty-container">
+                                <i class="fas fa-folder-open" style="font-size: 40px;"></i>
+                                <span>Empty Data</span>
+                            </div>
+                        </div>';
+                    }
+                    ?>
 
-                        ?>
 
-                    </div>
                 </div>
                 <div class="sale-order-wrap">
                     <div class="sale-product-order">

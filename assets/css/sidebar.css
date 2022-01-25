@@ -3,7 +3,7 @@ li {
     list-style-type: none;
 }
 .sidebar{
-    z-index: 9999;
+    z-index: 1050;
     width: 260px;
     background-color: #24344b;
     height: 100%;
@@ -23,7 +23,7 @@ li {
     }
 
 .wrap-main-header {
-    z-index: 9998;
+    z-index: 1050;
     height: 50px;
     width: 100%;
     box-shadow: 0px 1px 6px 0px rgb(0, 0, 0, 0.5);

@@ -7,6 +7,32 @@ include('../menu-sidebar.php');
 $appFunction = new ApplicationFunction();
 $result = $appFunction->checkCurrentLoginUser();
 
+
+// Add Product Form
+if (isset($_POST["add_product"])) {
+    $code = $_POST["add_product_code"];
+    $name = $_POST["add_product_name"];
+    $price = $_POST["add_product_price"];
+    $image = "../images/no_image.png";
+
+    // Image FIle
+    $fileImage = $_FILES["add_product_image"] ?? "";
+
+    if ($fileImage != "") {
+        $uploaddir  = "../uploads/";
+        $uploadfile = $uploaddir . ($fileImage['name']);
+        if (move_uploaded_file($fileImage["tmp_name"], $uploadfile)) {
+            $image = "$root/uploads/" . $fileImage['name'];
+        }
+    }
+
+    $query = "INSERT INTO data_product(product_code, product_name, product_price, product_image) VALUE ('$code','$name', $price,'$image')";
+    $resp = $dbConn->query($query);
+    if ($resp) {
+        // Success
+    }
+}
+
 ?>
 
 
@@ -68,19 +94,30 @@ $result = $appFunction->checkCurrentLoginUser();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td style="width: 60px;" class="text-center">1</td>
-                                            <td class="product-image-td">
-                                                <div class="product-image">
-                                                    <img src="https://ecomdev.kesspay.io/storage/product/2248/pebaQjmmjyJSDHPkZKD2cCvk1kYWXGlPcswBmWb7.jpeg"
-                                                        alt="">
-                                                </div>
-                                            </td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>Thornton</td>
-                                            <td></td>
-                                        </tr>
+
+                                        <?php
+
+                                        $query = "SELECT product_code, product_name, product_price, product_image, is_deleted FROM data_product";
+                                        $result =  $dbConn->query($query);
+                                        $i = 1;
+                                        if ($result) {
+                                            if ($result->num_rows > 0) {
+                                                include('../components.php');
+                                                $appCom = new ApplicationComponent();
+
+                                                while ($row = $result->fetch_assoc()) {
+                                                    $no = $i;
+                                                    $product_code = $row['product_code'];
+                                                    $product_name = $row['product_name'];
+                                                    $product_price = $row['product_price'];
+                                                    $product_image = $row['product_image'];
+
+                                                    $appCom->ComProductList($no, $product_image, $product_code, $product_name, $product_price);
+                                                    $i++;
+                                                }
+                                            }
+                                        }
+                                        ?>
 
                                     </tbody>
                                 </table>
@@ -114,42 +151,47 @@ $result = $appFunction->checkCurrentLoginUser();
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add Product</h5>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" name="add_product">
+
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Product</h5>
+                            </div>
+                            <div class="modal-body">
                                 <div class="form-group">
                                     <div class="add-product-image">
                                         <div class="image">
-                                            <img src="<?php echo $root; ?>/images/no_image.png" alt="">
+                                            <img id="profile_img" src="<?php echo $root; ?>/images/no_image.png" alt="">
                                         </div>
-                                        <div class="upload_img">
-                                            <i class="fas fa-camera"></i>
-                                        </div>
+                                        <label class="upload_img">
+                                            <div class="icon-upload">
+                                                <i class="fas fa-camera"></i>
+                                            </div>
+                                            <input name="add_product_image" type="file" id="imgInp" class="d-none"
+                                                accept=".gif,.jpg,.jpeg,.png">
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="product_name">Product Code</label>
+                                    <input id="product_name" name="add_product_code" class="form-control" type="text"
+                                        placeholder="Product Code" autocomplete="off">
+                                </div>
+                                <div class="form-group">
                                     <label for="product_name">Product Name</label>
-                                    <input id="product_name" class="form-control" type="text"
-                                        placeholder="Product Name">
+                                    <input id="product_name" name="add_product_name" class="form-control" type="text"
+                                        placeholder="Product Name" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="product_name">Product Price</label>
-                                    <input id="product_name" class="form-control" type="text"
-                                        placeholder="Product Price">
+                                    <input id="product_name" name="add_product_price" class="form-control" type="text"
+                                        placeholder="Product Price" autocomplete="off">
                                 </div>
-                                <div class="form-group">
-                                    <label for="product_name">Product Name</label>
-                                    <input id="product_name" class="form-control" type="text"
-                                        placeholder="Product Name">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success">Save changes</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" name="add_product">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
