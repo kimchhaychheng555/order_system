@@ -10,6 +10,10 @@ $dbUsername = "root";
 $dbPassword = "123456";
 $dbDatabase = "order_system";
 
+// App Setting
+$root = "http://localhost:8080/application/order_system";
+$appName = "POS System";
+
 
 $dbConn =  mysqli_connect($dbServerName, $dbUsername, $dbPassword, $dbDatabase);
 

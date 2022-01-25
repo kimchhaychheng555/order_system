@@ -1,6 +1,8 @@
 @import 'bootstrap/bootstrap.min.css';
 @import 'bootstrap/bootstrap-grid.min.css';
 @import 'bootstrap/bootstrap-reboot.min.css';
+@import 'mdb/mdb.min.css';
+@import 'mdb/mdb.rtl.min.css';
 @import 'https://pro.fontawesome.com/releases/v5.15.4/css/all.css';
 @import 'sidebar.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
@@ -67,6 +69,10 @@ html, body{
     padding: 0;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+}
+ul {
+    margin: 0;
+    padding: 0;
 }
 a {
     color: initial;

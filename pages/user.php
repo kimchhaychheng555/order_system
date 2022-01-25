@@ -16,7 +16,7 @@ $result = $appFunction->checkCurrentLoginUser();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reports - <?php echo $appName; ?></title>
+    <title>Users - <?php echo $appName; ?></title>
     <link rel="stylesheet" href="../assets/css/default.css">
 </head>
 
@@ -24,7 +24,7 @@ $result = $appFunction->checkCurrentLoginUser();
     <div class="wrap-main-header justify-content-between">
         <div class="left-side d-flex align-items-center">
             <span id="btn_toggle_sidebar" class="cursor-pointer"><i class="far fa-bars"></i></span>
-            <h6 class="app-bar-name">Reports</h6>
+            <h6 class="app-bar-name">Users</h6>
         </div>
         <div class="right-side">
 
@@ -42,7 +42,7 @@ $result = $appFunction->checkCurrentLoginUser();
             </div>
             <?php
             $menu = new MenuSidebar();
-            $menu->Display("report");
+            $menu->Display("user");
             ?>
         </div>
         <div class="wrap-content-main">
