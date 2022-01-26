@@ -9,9 +9,34 @@ $(document).ready(function () {
     });
 
 
-    $("#imgInp").change(function () {
+    $(".imgInp").change(function () {
         readURL(this);
     });
+
+    $(".modify_imgInp").change(function () {
+        uploadModifyImage(this);
+    });
+
+
+    $(".delete-btn-table").click(function () {
+        var product_code = $(this).attr("data-id");
+        $("#input_delete_product_code").val(product_code);
+        $("#delete_product_code").html(product_code);
+    });
+
+    $(".edit-btn-table").click(function () {
+
+        var product_code = $(this).attr("data-product-code");
+        var product_image = $(this).attr("data-product-image");
+        var product_name = $(this).attr("data-product-name");
+        var product_price = $(this).attr("data-product-price");
+
+        $("#modify_product_code").val(product_code);
+        $("#modify_product_image").val(product_image);
+        $("#modify_product_name").val(product_name);
+        $("#modify_product_price").val(product_price);
+    });
+
 });
 
 function UI_Slider_Toggle() {
@@ -38,3 +63,15 @@ function readURL(input) {
     }
 }
 
+function uploadModifyImage(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#modify_profile_img').attr('src', e.target.result);
+            $('#modify_profile_img').addClass('d-block');
+        }
+
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+}

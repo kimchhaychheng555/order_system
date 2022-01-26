@@ -5,7 +5,7 @@ include('../functions.php');
 include('../menu-sidebar.php');
 
 $appFunction = new ApplicationFunction();
-$result = $appFunction->checkCurrentLoginUser();
+$appFunction->checkCurrentLoginUser();
 
 
 // Add Product Form
@@ -26,12 +26,86 @@ if (isset($_POST["add_product"])) {
         }
     }
 
-    $query = "INSERT INTO data_product(product_code, product_name, product_price, product_image) VALUE ('$code','$name', $price,'$image')";
+    $_selecQ = "SELECT * FROM data_product WHERE product_code = '$code'";
+    $_selectResp = $dbConn->query($_selecQ);
+    if ($_selectResp) {
+        // Duplicate DAta
+    } else {
+        $query = "INSERT INTO data_product(product_code, product_name, product_price, product_image) VALUE ('$code','$name', $price,'$image')";
+        $resp = $dbConn->query($query);
+        if ($resp) {
+            // Success
+        }
+    }
+}
+
+
+// Modify Product Form
+if (isset($_POST["modify_product"])) {
+    $code = $_POST["add_product_code"];
+    $name = $_POST["add_product_name"];
+    $price = $_POST["add_product_price"];
+    $image = "../images/no_image.png";
+
+    // Image FIle
+    $fileImage = $_FILES["add_product_image"] ?? "";
+
+    if ($fileImage != "") {
+        $uploaddir  = "../uploads/";
+        $uploadfile = $uploaddir . ($fileImage['name']);
+        if (move_uploaded_file($fileImage["tmp_name"], $uploadfile)) {
+            $image = "$root/uploads/" . $fileImage['name'];
+        }
+    }
+
+
+    $query = "UPDATE data_product SET 
+            product_name='$name', 
+            product_price='$price', 
+            product_image = '$image' 
+            WHERE product_code = '$code'";
     $resp = $dbConn->query($query);
     if ($resp) {
         // Success
     }
 }
+
+// Delete Product
+if (isset($_POST["delete_product"])) {
+    $code = $_POST['delete_product_code'];
+
+    $query = "UPDATE data_product SET
+                is_deleted = 1 WHERE product_code = '$code'";
+    $resp = $dbConn->query($query);
+    if ($resp) {
+        // Success
+    }
+}
+
+// Delete Product
+if (isset($_POST["restore_product"])) {
+    $code = $_POST['restore_product_code'];
+
+    $query = "UPDATE data_product SET
+                is_deleted = 0 WHERE product_code = '$code'";
+    $resp = $dbConn->query($query);
+    if ($resp) {
+        // Success
+    }
+}
+
+
+
+
+
+$query = "SELECT product_code, product_name, product_price, product_image FROM data_product WHERE is_deleted = 0";
+$dataResult =  $dbConn->query($query);
+
+
+// Pagination Structure
+var_dump(ceil(($dataResult->num_rows) / 10));
+
+
 
 ?>
 
@@ -74,13 +148,19 @@ if (isset($_POST["add_product"])) {
         </div>
         <div class="wrap-content-main">
             <div class="product-wrap">
-                <div class="product-header">
-                    <button class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Add
-                        Product</button>
-                </div>
                 <div class="product-list-view">
                     <div class="card">
-                        <div class="card-body overflow-auto">
+                        <div class="header-panel pb-0">
+                            <div>
+                                <form action="" method="GET">
+                                    <input type="text" name="keyword" class="form-control" placeholder="Search...">
+                                </form>
+                            </div>
+                            <button class="btn btn-table-action btn-success" data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal">
+                                <i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="card-body table-body overflow-auto">
                             <div class="table-data">
                                 <table class="table table-hover mb-0">
                                     <thead class="sticky-top">
@@ -96,16 +176,13 @@ if (isset($_POST["add_product"])) {
                                     <tbody>
 
                                         <?php
-
-                                        $query = "SELECT product_code, product_name, product_price, product_image, is_deleted FROM data_product";
-                                        $result =  $dbConn->query($query);
                                         $i = 1;
-                                        if ($result) {
-                                            if ($result->num_rows > 0) {
+                                        if ($dataResult) {
+                                            if ($dataResult->num_rows > 0) {
                                                 include('../components.php');
                                                 $appCom = new ApplicationComponent();
 
-                                                while ($row = $result->fetch_assoc()) {
+                                                while ($row = $dataResult->fetch_assoc()) {
                                                     $no = $i;
                                                     $product_code = $row['product_code'];
                                                     $product_name = $row['product_name'];
@@ -122,10 +199,13 @@ if (isset($_POST["add_product"])) {
                                     </tbody>
                                 </table>
                             </div>
-                            <nav class="footer-nav">
+                            <nav class="footer-nav d-flex justify-content-between align-items-center">
                                 <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">First</a>
+                                    </li>
                                     <li class="page-item disabled">
-                                        <span class="page-link">Previous</span>
+                                        <a class="page-link">Prev</a>
                                     </li>
                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                     <li class="page-item active" aria-current="page">
@@ -138,7 +218,18 @@ if (isset($_POST["add_product"])) {
                                     <li class="page-item">
                                         <a class="page-link" href="#">Next</a>
                                     </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Last</a>
+                                    </li>
                                 </ul>
+                                <div>
+                                    <select class="form-control">
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>50</option>
+                                        <option>100</option>
+                                    </select>
+                                </div>
                             </nav>
                         </div>
                     </div>
@@ -166,14 +257,14 @@ if (isset($_POST["add_product"])) {
                                             <div class="icon-upload">
                                                 <i class="fas fa-camera"></i>
                                             </div>
-                                            <input name="add_product_image" type="file" id="imgInp" class="d-none"
+                                            <input name="add_product_image" class="d-none imgInp"
                                                 accept=".gif,.jpg,.jpeg,.png">
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="product_name">Product Code</label>
-                                    <input id="product_name" name="add_product_code" class="form-control" type="text"
+                                    <label for="product_code">Product Code</label>
+                                    <input id="product_code" name="add_product_code" class="form-control" type="text"
                                         placeholder="Product Code" autocomplete="off">
                                 </div>
                                 <div class="form-group">
@@ -182,8 +273,8 @@ if (isset($_POST["add_product"])) {
                                         placeholder="Product Name" autocomplete="off">
                                 </div>
                                 <div class="form-group">
-                                    <label for="product_name">Product Price</label>
-                                    <input id="product_name" name="add_product_price" class="form-control" type="text"
+                                    <label for="product_price">Product Price</label>
+                                    <input id="product_price" name="add_product_price" class="form-control" type="text"
                                         placeholder="Product Price" autocomplete="off">
                                 </div>
                             </div>
@@ -197,7 +288,82 @@ if (isset($_POST["add_product"])) {
             </div>
 
 
+            <!-- Modal -->
+            <div class="modal fade confirm_modal" id="deleted_product" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Delete Product #<span id="delete_product_code"></span></h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="confirm-modal-delete-icon">
+                                    <i class="fal fa-times-circle text-danger"></i>
+                                </div>
+                                <input type="text" id="input_delete_product_code" value="" name="delete_product_code"
+                                    hidden>
+                                <p class="text-center">Are you sure ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-mdb-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger" name="delete_product">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Edit Modal -->
+            <div class="modal fade edit_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modify Product</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="add-product-image">
+                                        <div class="image">
+                                            <img id="modify_profile_img" src="<?php echo $root; ?>/images/no_image.png"
+                                                alt="">
+                                        </div>
+                                        <label class="upload_img">
+                                            <div class="icon-upload">
+                                                <i class="fas fa-camera"></i>
+                                            </div>
+                                            <input name="add_product_image" type="file" class="modify_imgInp d-none"
+                                                accept=".gif,.jpg,.jpeg,.png">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modify_product_code">Product Code</label>
+                                    <input id="modify_product_code" name="add_product_code" class="form-control"
+                                        type="text" placeholder="Product Code" autocomplete="off" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modify_product_name">Product Name</label>
+                                    <input id="modify_product_name" name="add_product_name" class="form-control"
+                                        type="text" placeholder="Product Name" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="modify_product_price">Product Price</label>
+                                    <input id="modify_product_price" name="add_product_price" class="form-control"
+                                        type="text" placeholder="Product Price" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" name="modify_product">Save
+                                    changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <!-- End Code Here -->
 
         </div>

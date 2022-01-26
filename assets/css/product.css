@@ -7,9 +7,9 @@
     margin-bottom: 1rem;
 }
 .product-list-view .card {
-    height: calc(100% - 52px);
+    height: 100%;
 }
-.product-list-view .card-body {
+.product-list-view .table-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,7 +23,7 @@
     background: white;
     box-shadow: 0px -3px 8px 0px darkgrey;
 }
-.product-list-view .card-body {
+.product-list-view .table-body {
     padding: 1rem;
 }
 .product-list-view .footer-nav {
@@ -31,6 +31,7 @@
 }
 .product-list-view .product-image {
     width: 50px;
+    border: 1px solid #bdbdbd;
     height: 50px;
     overflow: hidden;
     border-radius: 50%;
@@ -77,4 +78,13 @@
     align-items: center;
     justify-content: center;
     background: white;
+}
+.btn-table-action {
+    padding: 0.65rem;
+    margin: 0 2px;
+}
+li.page-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
