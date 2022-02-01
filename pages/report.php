@@ -35,8 +35,7 @@ $result = $appFunction->checkCurrentLoginUser();
         <div class="sidebar" id="ui_sidebar">
             <div class="avatar_wrap" id="avatar_wrap">
                 <div class="avatar_logo">
-                    <img
-                        src="<?php echo empty($_SESSION['image']) ? '../images/no_image.png' :  $_SESSION['image']; ?>">
+                    <img src="<?php echo empty($_SESSION['image']) ? '../images/no_image.png' :  $_SESSION['image']; ?>">
                 </div>
                 <h6 class="mt-2"><?php echo $_SESSION['fullname'] ?></h6>
             </div>
@@ -59,9 +58,12 @@ $result = $appFunction->checkCurrentLoginUser();
 
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/mdb/mdb.min.js"></script>
 <script src="../assets/js/default.js"></script>
+<script src="../assets/js/vue.js"></script>
+<script src="../assets/js/jquery.toast.min.js"></script>
 
 </html>

@@ -4,8 +4,13 @@ $(window).on("load", function () {
 
 
 $(document).ready(function () {
+
     $("#btn_toggle_sidebar").click(function () {
         UI_Slider_Toggle();
+    });
+
+    $("#paging").change(function () {
+        $("#form_pagination").submit();
     });
 
 
@@ -74,4 +79,23 @@ function uploadModifyImage(input) {
 
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
+}
+
+
+
+function successAlert() {
+    $.toast({
+        text: "Don't forget to star the repository if you like it.", // Text that is to be shown in the toast
+        heading: 'Note', // Optional heading to be shown on the toast
+        showHideTransition: 'fade', // fade, slide or plain
+        allowToastClose: false, // Boolean value true or false
+        hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+        stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+        position: 'top-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+        bgColor: '#00b74a',  // Background color of the toast
+        textColor: '#ffffff',  // Text color of the toast
+        textAlign: 'left',  // Text alignment i.e. left, right or center
+        loader: true,  // Whether to show loader or not. True by default
+        loaderBg: '#02722f',  // Background color of the toast loader
+    });
 }

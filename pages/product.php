@@ -8,6 +8,7 @@ $appFunction = new ApplicationFunction();
 $appFunction->checkCurrentLoginUser();
 
 
+
 // Add Product Form
 if (isset($_POST["add_product"])) {
     $code = $_POST["add_product_code"];
@@ -28,9 +29,7 @@ if (isset($_POST["add_product"])) {
 
     $_selecQ = "SELECT * FROM data_product WHERE product_code = '$code'";
     $_selectResp = $dbConn->query($_selecQ);
-    if ($_selectResp) {
-        // Duplicate DAta
-    } else {
+    if ($_selectResp->num_rows == 0) {
         $query = "INSERT INTO data_product(product_code, product_name, product_price, product_image) VALUE ('$code','$name', $price,'$image')";
         $resp = $dbConn->query($query);
         if ($resp) {
@@ -95,20 +94,37 @@ if (isset($_POST["restore_product"])) {
 }
 
 
+// Pagination Structure ======================================================
+
+// Pagination Vairable      
+$paging =  doubleval($_GET["paging"] ?? 25);  // Page Selected
+$pager = doubleval($_GET["pager"] ?? 1); // Current Page
+$keyword = $_GET["keyword"] ?? "";
 
 
-
-$query = "SELECT product_code, product_name, product_price, product_image FROM data_product WHERE is_deleted = 0";
+$_limit = ($paging);
+$_offet = (($pager - 1) * $paging);
+$query = "
+    SELECT 
+        product_code, 
+        product_name, 
+        product_price, 
+        product_image 
+    FROM data_product 
+    WHERE is_deleted = 0
+    AND product_name LIKE '%$keyword%'
+    LIMIT $_limit OFFSET $_offet
+    ";
 $dataResult =  $dbConn->query($query);
 
-
-// Pagination Structure
-var_dump(ceil(($dataResult->num_rows) / 10));
-
-
+$_queryCount = "SELECT COUNT(id) as count FROM data_product WHERE is_deleted = 0 AND product_name LIKE '%$keyword%'";
+$_countPage = $dbConn->query($_queryCount);
+$_fetchCount = ($_countPage->fetch_assoc()['count']);
+$_countable = ($_fetchCount) == 0 ? 1 : ($_fetchCount);
+$numberOfPage = ceil($_countable / $paging);
+// End Pagination Structure ======================================================
 
 ?>
-
 
 <html lang="en">
 
@@ -150,90 +166,114 @@ var_dump(ceil(($dataResult->num_rows) / 10));
             <div class="product-wrap">
                 <div class="product-list-view">
                     <div class="card">
-                        <div class="header-panel pb-0">
-                            <div>
-                                <form action="" method="GET">
-                                    <input type="text" name="keyword" class="form-control" placeholder="Search...">
-                                </form>
+                        <form action="" method="GET" id="form_pagination">
+                            <div class="header-panel pb-0">
+                                <div>
+                                    <input type="text" name="keyword" class="form-control"
+                                        value="<?php echo $keyword; ?>" placeholder="Search...">
+                                </div>
+                                <div class="btn btn-table-action btn-success" data-mdb-toggle="modal"
+                                    data-mdb-target="#exampleModal"><i class="fas fa-plus"></i></div>
                             </div>
-                            <button class="btn btn-table-action btn-success" data-mdb-toggle="modal"
-                                data-mdb-target="#exampleModal">
-                                <i class="fas fa-plus"></i></button>
-                        </div>
-                        <div class="card-body table-body overflow-auto">
-                            <div class="table-data">
-                                <table class="table table-hover mb-0">
-                                    <thead class="sticky-top">
-                                        <tr>
-                                            <th style="width: 60px;">#</th>
-                                            <th></th>
-                                            <th>Product Code</th>
-                                            <th>Product Name</th>
-                                            <th>Price</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <div class="card-body table-body overflow-auto">
+                                <div class="table-data">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="sticky-top">
+                                            <tr>
+                                                <th style="width: 60px;">#</th>
+                                                <th></th>
+                                                <th>Product Code</th>
+                                                <th>Product Name</th>
+                                                <th>Price</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <?php
+                                            $i = 1;
+                                            if ($dataResult) {
+                                                if ($dataResult->num_rows > 0) {
+                                                    include('../components.php');
+                                                    $appCom = new ApplicationComponent();
+
+                                                    while ($row = $dataResult->fetch_assoc()) {
+                                                        $no = ($i + $_offet);
+                                                        $product_code = $row['product_code'];
+                                                        $product_name = $row['product_name'];
+                                                        $product_price = $row['product_price'];
+                                                        $product_image = $row['product_image'];
+
+                                                        $appCom->ComProductList($no, $product_image, $product_code, $product_name, $product_price);
+                                                        $i++;
+                                                    }
+                                                } else {
+                                                    echo '
+                                                    <tr>
+                                                        <td colspan="6" class="text-center p-3">No Data</td>
+                                                    </tr>';
+                                                }
+                                            } else {
+                                                echo '
+                                                <tr>
+                                                    <td colspan="6" class="text-center p-3">No Data</td>
+                                                </tr>';
+                                            }
+                                            ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <nav class="footer-nav d-flex justify-content-between align-items-center">
+                                    <ul class="pagination">
+
+                                        <li class="page-item <?php echo $pager == 1 ? "disabled" : ""; ?>">
+                                            <button name="pager" class="page-link" value="1">First</button>
+                                        </li>
+
+                                        <li class="page-item <?php echo $pager == 1 ? "disabled" : ""; ?>">
+                                            <button name="pager" class="page-link"
+                                                value="<?php echo $pager - 1; ?>">Prev</button>
+                                        </li>
 
                                         <?php
-                                        $i = 1;
-                                        if ($dataResult) {
-                                            if ($dataResult->num_rows > 0) {
-                                                include('../components.php');
-                                                $appCom = new ApplicationComponent();
-
-                                                while ($row = $dataResult->fetch_assoc()) {
-                                                    $no = $i;
-                                                    $product_code = $row['product_code'];
-                                                    $product_name = $row['product_name'];
-                                                    $product_price = $row['product_price'];
-                                                    $product_image = $row['product_image'];
-
-                                                    $appCom->ComProductList($no, $product_image, $product_code, $product_name, $product_price);
-                                                    $i++;
-                                                }
-                                            }
+                                        // Loop Pager
+                                        for ($i = 1; $i <= $numberOfPage; $i++) {
+                                            $active = $i == $pager ? "active" : "";
+                                            echo '
+                                                <li class="page-item ' . $active . '">
+                                                    <button name="pager" class="page-link" value="' . $i . '">' . $i . '</button>
+                                                </li>
+                                                ';
                                         }
                                         ?>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <nav class="footer-nav d-flex justify-content-between align-items-center">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">First</a>
-                                    </li>
-                                    <li class="page-item disabled">
-                                        <a class="page-link">Prev</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                        <span class="page-link">
-                                            2
-                                            <span class="visually-hidden">(current)</span>
-                                        </span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Last</a>
-                                    </li>
-                                </ul>
-                                <div>
-                                    <select class="form-control">
-                                        <option>10</option>
-                                        <option>20</option>
-                                        <option>50</option>
-                                        <option>100</option>
-                                    </select>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
 
+                                        <li class="page-item <?php echo $pager == $numberOfPage ? "disabled" : ""; ?>">
+                                            <button name="pager" class="page-link"
+                                                value="<?php echo $pager + 1; ?>">Next</button>
+                                        </li>
+                                        <li class="page-item <?php echo $pager == $numberOfPage ? "disabled" : ""; ?>">
+                                            <button name="pager" class="page-link"
+                                                value="<?php echo $numberOfPage; ?>">Last</button>
+                                        </li>
+                                    </ul>
+                                    <div class="select-form">
+                                        <select class="form-control" name="paging" id="paging">
+                                            <option value="10" <?php echo $paging == 10 ? "selected" : ""; ?>>10
+                                            </option>
+                                            <option value="25" <?php echo $paging == 25 ? "selected" : ""; ?>>25
+                                            </option>
+                                            <option value="50" <?php echo $paging == 50 ? "selected" : ""; ?>>50
+                                            </option>
+                                            <option value="100" <?php echo $paging == 100 ? "selected" : ""; ?>>100
+                                            </option>
+                                        </select>
+                                    </div>
+                                </nav>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -373,9 +413,15 @@ var_dump(ceil(($dataResult->num_rows) / 10));
 
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/mdb/mdb.min.js"></script>
 <script src="../assets/js/default.js"></script>
+<script src="../assets/js/vue.js"></script>
+<script src="../assets/js/jquery.toast.min.js"></script>
+
+
+
 
 </html>

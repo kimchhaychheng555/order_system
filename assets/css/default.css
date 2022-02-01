@@ -1,6 +1,7 @@
 @import 'bootstrap/bootstrap.min.css';
 @import 'bootstrap/bootstrap-grid.min.css';
 @import 'bootstrap/bootstrap-reboot.min.css';
+@import 'jquery.toast.min.css';
 @import 'mdb/mdb.min.css';
 @import 'mdb/mdb.rtl.min.css';
 @import 'https://pro.fontawesome.com/releases/v5.15.4/css/all.css';
@@ -102,6 +103,7 @@ h1, h2, h3, h4, h5, h6, p {
 .wrap-content-main {
     padding: 1rem;
     width: calc(100% - 260px);
+    overflow: auto;
 }
 
     @media (max-width: 992px) {

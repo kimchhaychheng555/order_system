@@ -88,7 +88,8 @@ $result = $appFunction->checkCurrentLoginUser();
 
                 </div>
                 <div class="sale-order-wrap">
-                    <div class="sale-product-order">
+                    <div class="sale-product-order" id="saleProductOrder">
+                        {{ message }}
                         <div class="sale-order-item">
                             <div class="sale-order-product-name">
                                 <h6>Coffee</h6>
@@ -135,10 +136,13 @@ $result = $appFunction->checkCurrentLoginUser();
 
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/mdb/mdb.min.js"></script>
 <script src="../assets/js/default.js"></script>
+<script src="../assets/js/vue.js"></script>
+<script src="../assets/js/jquery.toast.min.js"></script>
 <script src="../assets/js/sale.js"></script>
 
 </html>

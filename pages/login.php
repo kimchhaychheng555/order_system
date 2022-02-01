@@ -69,9 +69,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
     <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
     <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/default.js"></script>
+    <script src="../assets/js/vue.js"></script>
+    <script src="../assets/js/jquery.toast.min.js"></script>
 </body>
 
 </html>
