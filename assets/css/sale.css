@@ -53,7 +53,30 @@
     border-radius: 10px;
     height: 180px;
     box-shadow: 0px 0px 11px 1px #cdcdcd;
+    position: relative;
 }
+
+.product.active {
+    border: 2px solid #00b74a;
+}
+/* 
+.product.product_item .qty{
+    display: none;
+}
+.product.product_item.active .qty {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    z-index: 1;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #24344b;
+    color: white;
+} */
 
 .product .product-image {
     position: relative;

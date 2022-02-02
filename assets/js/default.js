@@ -81,21 +81,37 @@ function uploadModifyImage(input) {
     }
 }
 
+function alertToast(type, title) {
 
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "500",
+        "timeOut": "1800",
+        "extendedTimeOut": "2000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
-function successAlert() {
-    $.toast({
-        text: "Don't forget to star the repository if you like it.", // Text that is to be shown in the toast
-        heading: 'Note', // Optional heading to be shown on the toast
-        showHideTransition: 'fade', // fade, slide or plain
-        allowToastClose: false, // Boolean value true or false
-        hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
-        stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-        position: 'top-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-        bgColor: '#00b74a',  // Background color of the toast
-        textColor: '#ffffff',  // Text color of the toast
-        textAlign: 'left',  // Text alignment i.e. left, right or center
-        loader: true,  // Whether to show loader or not. True by default
-        loaderBg: '#02722f',  // Background color of the toast loader
-    });
+    if (type == "error") {
+        toastr.error(title);
+    }
+    if (type == "success") {
+        toastr.success(title);
+    }
+    if (type == "warning") {
+        toastr.warning(title);
+    }
+    if (type == "info") {
+        toastr.info(title);
+    }
+
 }

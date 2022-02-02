@@ -7,6 +7,12 @@ include('../menu-sidebar.php');
 $appFunction = new ApplicationFunction();
 $result = $appFunction->checkCurrentLoginUser();
 
+var_dump($_POST);
+
+if (isset($_POST["submitOrder"])) {
+    // var
+}
+
 ?>
 
 
@@ -50,8 +56,7 @@ $result = $appFunction->checkCurrentLoginUser();
 
             <!-- Your Code Here -->
 
-            <div class="sale-wrap">
-
+            <div class="sale-wrap" id="saleProductOrder">
                 <div class="product-scroll-controller">
 
                     <?php
@@ -88,42 +93,30 @@ $result = $appFunction->checkCurrentLoginUser();
 
                 </div>
                 <div class="sale-order-wrap">
-                    <div class="sale-product-order" id="saleProductOrder">
-                        {{ message }}
-                        <div class="sale-order-item">
-                            <div class="sale-order-product-name">
-                                <h6>Coffee</h6>
-                                <p>price: $20.00</p>
-                            </div>
-                            <div class="sale-order-compute-qty">
-                                <i class="fal fa-plus-circle"></i>
-                                <div class="sale-order-price">
-                                    <h6>5</h6>
+                    <form action="" method="POST" id="formSubmitOrder">
+                        <div class="sale-product-order" id="saleOrderItem">
+
+                        </div>
+                        <div class="sale-order-summary">
+                            <div class="total-summary">
+                                <div class="data-summary">
+                                    <span class="label">Quantity</span>
+                                    <span class="label" id="totalSaleOrderQuantity">0</span>
                                 </div>
-                                <i class="fal fa-minus-circle"></i>
-                            </div>
-                            <div class="sale-order-product-total-price">
-                                <h6>$ 100.00</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sale-order-summary">
-                        <div class="total-summary">
-                            <div class="data-summary">
-                                <span class="label">Quantity</span>
-                                <span class="label">5</span>
-                            </div>
-                            <div class="data-summary">
-                                <span class="label">Price</span>
-                                <span class="label">$100.00</span>
-                            </div>
-                            <div class="sale-order-action">
-                                <button class="btn btn-success">Submit Order</button>
-                                <div style="width: 10px;"></div>
-                                <button class="btn btn-info">Print</button>
+                                <div class="data-summary">
+                                    <span class="label">Price</span>
+                                    <span class="label" id="grandTotalSaleOrder">$0.00</span>
+                                </div>
+                                <div class="sale-order-action">
+                                    <button name="submitOrder" class="btn btn-success" id="btnSubmitOrder">Submit
+                                        Order</button>
+                                    <input name="saleOrder" id="saleOrderList" hidden>
+                                    <div style="width: 10px;"></div>
+                                    <button class="btn btn-info">Print</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -135,14 +128,15 @@ $result = $appFunction->checkCurrentLoginUser();
 </body>
 
 
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
 
+
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/mdb/mdb.min.js"></script>
 <script src="../assets/js/default.js"></script>
-<script src="../assets/js/vue.js"></script>
-<script src="../assets/js/jquery.toast.min.js"></script>
+
+<script src="../assets/js/jquery.number.min.js"></script>
 <script src="../assets/js/sale.js"></script>
 
 </html>

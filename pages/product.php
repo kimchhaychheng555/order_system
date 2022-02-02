@@ -152,8 +152,7 @@ $numberOfPage = ceil($_countable / $paging);
         <div class="sidebar" id="ui_sidebar">
             <div class="avatar_wrap" id="avatar_wrap">
                 <div class="avatar_logo">
-                    <img
-                        src="<?php echo empty($_SESSION['image']) ? '../images/no_image.png' :  $_SESSION['image']; ?>">
+                    <img src="<?php echo empty($_SESSION['image']) ? '../images/no_image.png' :  $_SESSION['image']; ?>">
                 </div>
                 <h6 class="mt-2"><?php echo $_SESSION['fullname'] ?></h6>
             </div>
@@ -169,11 +168,9 @@ $numberOfPage = ceil($_countable / $paging);
                         <form action="" method="GET" id="form_pagination">
                             <div class="header-panel pb-0">
                                 <div>
-                                    <input type="text" name="keyword" class="form-control"
-                                        value="<?php echo $keyword; ?>" placeholder="Search...">
+                                    <input type="text" name="keyword" class="form-control" value="<?php echo $keyword; ?>" placeholder="Search...">
                                 </div>
-                                <div class="btn btn-table-action btn-success" data-mdb-toggle="modal"
-                                    data-mdb-target="#exampleModal"><i class="fas fa-plus"></i></div>
+                                <div class="btn btn-table-action btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-plus"></i></div>
                             </div>
                             <div class="card-body table-body overflow-auto">
                                 <div class="table-data">
@@ -232,8 +229,7 @@ $numberOfPage = ceil($_countable / $paging);
                                         </li>
 
                                         <li class="page-item <?php echo $pager == 1 ? "disabled" : ""; ?>">
-                                            <button name="pager" class="page-link"
-                                                value="<?php echo $pager - 1; ?>">Prev</button>
+                                            <button name="pager" class="page-link" value="<?php echo $pager - 1; ?>">Prev</button>
                                         </li>
 
                                         <?php
@@ -250,12 +246,10 @@ $numberOfPage = ceil($_countable / $paging);
 
 
                                         <li class="page-item <?php echo $pager == $numberOfPage ? "disabled" : ""; ?>">
-                                            <button name="pager" class="page-link"
-                                                value="<?php echo $pager + 1; ?>">Next</button>
+                                            <button name="pager" class="page-link" value="<?php echo $pager + 1; ?>">Next</button>
                                         </li>
                                         <li class="page-item <?php echo $pager == $numberOfPage ? "disabled" : ""; ?>">
-                                            <button name="pager" class="page-link"
-                                                value="<?php echo $numberOfPage; ?>">Last</button>
+                                            <button name="pager" class="page-link" value="<?php echo $numberOfPage; ?>">Last</button>
                                         </li>
                                     </ul>
                                     <div class="select-form">
@@ -278,8 +272,7 @@ $numberOfPage = ceil($_countable / $paging);
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -297,25 +290,21 @@ $numberOfPage = ceil($_countable / $paging);
                                             <div class="icon-upload">
                                                 <i class="fas fa-camera"></i>
                                             </div>
-                                            <input name="add_product_image" class="d-none imgInp"
-                                                accept=".gif,.jpg,.jpeg,.png">
+                                            <input name="add_product_image" class="d-none imgInp" accept=".gif,.jpg,.jpeg,.png">
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_code">Product Code</label>
-                                    <input id="product_code" name="add_product_code" class="form-control" type="text"
-                                        placeholder="Product Code" autocomplete="off">
+                                    <input id="product_code" name="add_product_code" class="form-control" type="text" placeholder="Product Code" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="product_name">Product Name</label>
-                                    <input id="product_name" name="add_product_name" class="form-control" type="text"
-                                        placeholder="Product Name" autocomplete="off">
+                                    <input id="product_name" name="add_product_name" class="form-control" type="text" placeholder="Product Name" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="product_price">Product Price</label>
-                                    <input id="product_price" name="add_product_price" class="form-control" type="text"
-                                        placeholder="Product Price" autocomplete="off">
+                                    <input id="product_price" name="add_product_price" class="form-control" type="text" placeholder="Product Price" autocomplete="off">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -329,8 +318,7 @@ $numberOfPage = ceil($_countable / $paging);
 
 
             <!-- Modal -->
-            <div class="modal fade confirm_modal" id="deleted_product" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade confirm_modal" id="deleted_product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form method="POST" enctype="multipart/form-data">
@@ -341,8 +329,7 @@ $numberOfPage = ceil($_countable / $paging);
                                 <div class="confirm-modal-delete-icon">
                                     <i class="fal fa-times-circle text-danger"></i>
                                 </div>
-                                <input type="text" id="input_delete_product_code" value="" name="delete_product_code"
-                                    hidden>
+                                <input type="text" id="input_delete_product_code" value="" name="delete_product_code" hidden>
                                 <p class="text-center">Are you sure ?</p>
                             </div>
                             <div class="modal-footer">
@@ -367,32 +354,27 @@ $numberOfPage = ceil($_countable / $paging);
                                 <div class="form-group">
                                     <div class="add-product-image">
                                         <div class="image">
-                                            <img id="modify_profile_img" src="<?php echo $root; ?>/images/no_image.png"
-                                                alt="">
+                                            <img id="modify_profile_img" src="<?php echo $root; ?>/images/no_image.png" alt="">
                                         </div>
                                         <label class="upload_img">
                                             <div class="icon-upload">
                                                 <i class="fas fa-camera"></i>
                                             </div>
-                                            <input name="add_product_image" type="file" class="modify_imgInp d-none"
-                                                accept=".gif,.jpg,.jpeg,.png">
+                                            <input name="add_product_image" type="file" class="modify_imgInp d-none" accept=".gif,.jpg,.jpeg,.png">
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="modify_product_code">Product Code</label>
-                                    <input id="modify_product_code" name="add_product_code" class="form-control"
-                                        type="text" placeholder="Product Code" autocomplete="off" readonly>
+                                    <input id="modify_product_code" name="add_product_code" class="form-control" type="text" placeholder="Product Code" autocomplete="off" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="modify_product_name">Product Name</label>
-                                    <input id="modify_product_name" name="add_product_name" class="form-control"
-                                        type="text" placeholder="Product Name" autocomplete="off">
+                                    <input id="modify_product_name" name="add_product_name" class="form-control" type="text" placeholder="Product Name" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="modify_product_price">Product Price</label>
-                                    <input id="modify_product_price" name="add_product_price" class="form-control"
-                                        type="text" placeholder="Product Price" autocomplete="off">
+                                    <input id="modify_product_price" name="add_product_price" class="form-control" type="text" placeholder="Product Price" autocomplete="off">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -412,14 +394,16 @@ $numberOfPage = ceil($_countable / $paging);
 </body>
 
 
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
 
+
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/mdb/mdb.min.js"></script>
 <script src="../assets/js/default.js"></script>
-<script src="../assets/js/vue.js"></script>
-<script src="../assets/js/jquery.toast.min.js"></script>
+
+
+<script src="../assets/js/jquery.number.min.js"></script>
 
 
 

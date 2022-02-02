@@ -1,9 +1,9 @@
 @import 'bootstrap/bootstrap.min.css';
 @import 'bootstrap/bootstrap-grid.min.css';
 @import 'bootstrap/bootstrap-reboot.min.css';
-@import 'jquery.toast.min.css';
 @import 'mdb/mdb.min.css';
 @import 'mdb/mdb.rtl.min.css';
+@import 'toastr.min.css';
 @import 'https://pro.fontawesome.com/releases/v5.15.4/css/all.css';
 @import 'sidebar.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
@@ -69,7 +69,7 @@ html, body{
 * {
     padding: 0;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif,'Khmer OS Siemreap';
 }
 ul {
     margin: 0;
@@ -124,4 +124,9 @@ h1, h2, h3, h4, h5, h6, p {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
+}
+
+.btn-table-action {
+    padding: 0.65rem;
+    margin: 0 2px;
 }

@@ -72,10 +72,6 @@
     justify-content: center;
     background: white;
 }
-.btn-table-action {
-    padding: 0.65rem;
-    margin: 0 2px;
-}
 li.page-item {
     display: flex;
     align-items: center;

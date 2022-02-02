@@ -1,3 +1,6 @@
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/toastr.min.js"></script>
+
 <?php
 class ApplicationFunction
 {
@@ -127,5 +130,33 @@ class ApplicationFunction
                 <span class="sr-only">Loading...</span>
             </div>
         </div>';
+    }
+
+
+    function toastr($type, $str)
+    {
+        echo '
+            <script>    
+            $(document).ready(function ' . $type . '() {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "500",
+                    "timeOut": "1800",
+                    "extendedTimeOut": "2000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.' . $type . '("' . $str . '");
+            });
+        </script>';
     }
 }
