@@ -66,6 +66,12 @@ function refreshSaleOrder() {
         $("#saleOrderItem").append(saleOrder);
     }
 
+    if (saleOrderList.length > 0) {
+        $("#btnSubmitOrder, #btnPrintOrder").removeAttr("disabled");
+    } else {
+        $("#btnSubmitOrder, #btnPrintOrder").attr("disabled", "");
+    }
+
     totalSOQty();
 }
 

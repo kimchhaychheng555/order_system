@@ -52,4 +52,23 @@ class ApplicationComponent
             
         </tr>';
     }
+
+    static function ComReportList($no, $sale_number, $total_qty, $total_price)
+    {
+        include('config.php');
+        $price = '$ ' . number_format($total_price, 2, '.', ',');
+        // $data_value = "data-id='$total_qty'";
+
+        // $data_edit = "data-product-code='$productCode' data-product-image='$productImage' data-product-price='$productPrice' data-product-name='$productName'";
+
+        echo '
+        <tr>
+            <td style="width: 60px;" class="text-center">' . $no . '</td>
+            <td>' . $sale_number . '</td>
+            <td>' . $total_qty . '</td>
+            <td>' . $price . '</td>
+            <td></td>
+            
+        </tr>';
+    }
 }

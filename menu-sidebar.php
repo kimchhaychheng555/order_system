@@ -1,4 +1,6 @@
 <?php
+
+require_once('../vendor/autoload.php');
 class MenuSidebar
 {
     public function Display($current_menu)

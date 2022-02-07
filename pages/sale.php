@@ -1,4 +1,7 @@
 <?php
+
+use Ramsey\Uuid\Rfc4122\UuidV4;
+
 session_start();
 include('../config.php');
 include('../functions.php');
@@ -7,10 +10,36 @@ include('../menu-sidebar.php');
 $appFunction = new ApplicationFunction();
 $result = $appFunction->checkCurrentLoginUser();
 
-var_dump($_POST);
-
 if (isset($_POST["submitOrder"])) {
-    // var
+    $saleId = UuidV4::uuid4();
+    $totalPrice = 0;
+    $totalQty = 0;
+
+    $jsonobj = json_decode($_POST["saleOrder"]);
+
+    $query = "INSERT INTO data_sale(id, total_price, total_quantity) VALUES('$saleId', $totalPrice, $totalQty)";
+    $resp = $dbConn->query($query);
+    if ($resp) {
+        // Success
+    } else {
+        return;
+    }
+    foreach ($jsonobj as $item) {
+        // Add Sale Product to Db 
+        $spId = UuidV4::uuid4();
+        $_price = doubleval($item->product_price);
+        $_qty = doubleval($item->product_qty);
+
+        //
+        $totalPrice += $_price * $_qty;
+        $totalQty += $_qty;
+
+        $addSp = "INSERT INTO data_sale_product(id, price, quantity, sale_id) VALUE('$spId', $_price, $_qty, '$saleId')";
+        $resp = $dbConn->query($addSp);
+        if (!$resp) {
+            break;
+        }
+    }
 }
 
 ?>
@@ -108,11 +137,12 @@ if (isset($_POST["submitOrder"])) {
                                     <span class="label" id="grandTotalSaleOrder">$0.00</span>
                                 </div>
                                 <div class="sale-order-action">
-                                    <button name="submitOrder" class="btn btn-success" id="btnSubmitOrder">Submit
+                                    <button name="submitOrder" class="btn btn-success" id="btnSubmitOrder"
+                                        disabled>Submit
                                         Order</button>
                                     <input name="saleOrder" id="saleOrderList" hidden>
                                     <div style="width: 10px;"></div>
-                                    <button class="btn btn-info">Print</button>
+                                    <button id="btnPrintOrder" class="btn btn-info" disabled>Print</button>
                                 </div>
                             </div>
                         </div>
