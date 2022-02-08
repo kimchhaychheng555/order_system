@@ -17,6 +17,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+            $_SESSION["id"] = $row['id'];
             $_SESSION["username"] = $row['username'];
             $_SESSION["password"] = $row['password'];
             $_SESSION["fullname"] = $row['fullname'];

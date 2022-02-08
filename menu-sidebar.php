@@ -14,16 +14,17 @@ class MenuSidebar
                                 Orders
                             </li>
                         </a>
-                        <a href="' . $root . '/pages/product.php" class="menu-a-link ' . ($current_menu == "product" ? 'active' : '') . '">
-<i class="fas fa-database"></i>
-<li>
-    Products
-</li>
-</a>
+                        
 <a href="' . $root . '/pages/report.php" class="menu-a-link ' . ($current_menu == "report" ? 'active' : '') . '">
     <i class="fas fa-file-alt"></i>
     <li>
         Reports
+    </li>
+</a>
+<a href="' . $root . '/pages/product.php" class="menu-a-link ' . ($current_menu == "product" ? 'active' : '') . '">
+    <i class="fas fa-database"></i>
+    <li>
+        Products
     </li>
 </a>
 <a href="' . $root . '/pages/user.php" class="menu-a-link ' . ($current_menu == "user" ? 'active' : '') . '">

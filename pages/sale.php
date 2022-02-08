@@ -10,14 +10,22 @@ include('../menu-sidebar.php');
 $appFunction = new ApplicationFunction();
 $result = $appFunction->checkCurrentLoginUser();
 
+
 if (isset($_POST["submitOrder"])) {
     $saleId = UuidV4::uuid4();
-    $totalPrice = 0;
+    $grandTotal = 0;
     $totalQty = 0;
+
+    //
+    $res = $dbConn->query("SELECT data_value FROM data_setting WHERE data_key = 'sale_number'");
+    $saleNumber = "INV-" . sprintf('%05d', doubleval($res->fetch_assoc()['data_value']));
+
+    //
 
     $jsonobj = json_decode($_POST["saleOrder"]);
 
-    $query = "INSERT INTO data_sale(id, total_price, total_quantity) VALUES('$saleId', $totalPrice, $totalQty)";
+    $_user_id = $_SESSION['id'];
+    $query = "INSERT INTO data_sale(id, user_id) VALUES('$saleId', $_user_id)";
     $resp = $dbConn->query($query);
     if ($resp) {
         // Success
@@ -31,16 +39,28 @@ if (isset($_POST["submitOrder"])) {
         $_qty = doubleval($item->product_qty);
 
         //
-        $totalPrice += $_price * $_qty;
+        $grandTotal += $_price * $_qty;
         $totalQty += $_qty;
 
-        $addSp = "INSERT INTO data_sale_product(id, price, quantity, sale_id) VALUE('$spId', $_price, $_qty, '$saleId')";
+        //
+        $productAmount = $_price * $_qty;
+
+        $addSp = "INSERT INTO data_sale_product(id, product_price, product_quantity, sale_id, product_amount) VALUE('$spId', $_price, $_qty, '$saleId', $productAmount)";
         $resp = $dbConn->query($addSp);
         if (!$resp) {
             break;
         }
     }
+    $query = "UPDATE data_sale
+            SET 
+            grand_total = $grandTotal,
+            quantity = $totalQty,
+            sale_number = '$saleNumber' WHERE id = '$saleId';";
+    $resp = $dbConn->query($query);
+
+    $dbConn->query("UPDATE data_setting SET data_value = CAST(((SELECT CAST(data_value AS INT) as data_value FROM data_setting WHERE data_key ='sale_number')+1) as VARCHAR(25))  WHERE data_key ='sale_number'");
 }
+
 
 ?>
 
