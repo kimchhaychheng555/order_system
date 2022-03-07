@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .print_wrp {
+            width: 302.36px;
+            background-color: rgb(255, 214, 214);
+            text-align: center;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        table td:first-child {
+            text-align: left;
+        }
+
+        table td:last-child {
+            text-align: right;
+        }
+
+        table td {
+            padding: 5px;
+        }
+
+        thead tr {
+            border-bottom: 1px solid black;
+            font-weight: bold;
+        }
+
+        tfoot tr:first-child {
+            border-top: 1px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="print_wrp">
+        <h2>Phum Software</h2>
+        <h3>Receipt #P-00001</h3>
+        <table>
+            <thead>
+                <tr>
+                    <td>Description</td>
+                    <td>Price</td>
+                    <td>Qty</td>
+                    <td>Amt</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Coca Cola</td>
+                    <td>3.2</td>
+                    <td>2</td>
+                    <td>6.4</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td style="text-align: left; font-weight: bold;">Grand Total</td>
+                    <td colspan="2" style=" font-weight: bold;">4.30</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: center;">
+                        Thank You! See you again!
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -109,8 +109,7 @@ if (isset($_POST["submitOrder"])) {
                 <div class="product-scroll-controller">
 
                     <?php
-
-                    $query = "SELECT id, product_name, product_price, product_image, is_deleted FROM data_product";
+                    $query = "SELECT id, product_name, product_price, product_image, is_deleted FROM data_product WHERE is_deleted = 0";
                     $result =  $dbConn->query($query);
                     if ($result) {
                         if ($result->num_rows > 0) {
@@ -149,11 +148,11 @@ if (isset($_POST["submitOrder"])) {
                         <div class="sale-order-summary">
                             <div class="total-summary">
                                 <div class="data-summary">
-                                    <span class="label">Quantity</span>
+                                    <span class="label">Total Qty</span>
                                     <span class="label" id="totalSaleOrderQuantity">0</span>
                                 </div>
                                 <div class="data-summary">
-                                    <span class="label">Price</span>
+                                    <span class="label">Grand Total</span>
                                     <span class="label" id="grandTotalSaleOrder">$0.00</span>
                                 </div>
                                 <div class="sale-order-action">
@@ -162,7 +161,8 @@ if (isset($_POST["submitOrder"])) {
                                         Order</button>
                                     <input name="saleOrder" id="saleOrderList" hidden>
                                     <div style="width: 10px;"></div>
-                                    <button id="btnPrintOrder" class="btn btn-info" disabled>Print</button>
+                                    <button type="button" id="btnPrintOrder" class="btn btn-info"
+                                        disabled>Print</button>
                                 </div>
                             </div>
                         </div>

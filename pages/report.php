@@ -22,12 +22,14 @@ $query = "
     SELECT 
         id, 
         sale_number,
-        total_price, 
-        total_quantity
+        grand_total, 
+        quantity
     FROM data_sale 
     WHERE is_deleted = 0
+    ORDER BY sale_number asc
     LIMIT $_limit OFFSET $_offet
     ";
+
 $dataResult =  $dbConn->query($query);
 
 $_queryCount = "SELECT COUNT(id) as count FROM data_sale WHERE is_deleted = 0";
@@ -104,8 +106,8 @@ $numberOfPage = ceil($_countable / $paging);
                                                     while ($row = $dataResult->fetch_assoc()) {
                                                         $no = ($i + $_offet);
                                                         $sale_number = $row['sale_number'];
-                                                        $total_qty = $row['total_quantity'];
-                                                        $total_price = $row['total_price'];
+                                                        $total_qty = $row['quantity'];
+                                                        $total_price = $row['grand_total'];
 
                                                         $appCom->ComReportList($no, $sale_number, $total_qty, $total_price);
                                                         $i++;

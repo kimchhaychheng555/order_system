@@ -1,4 +1,5 @@
 var saleOrderList = [];
+var listSaleOrderItem = [];
 
 $(document).ready(function () {
     $(".product_item").click(function () {
@@ -29,6 +30,10 @@ $(document).ready(function () {
 
     $("#btnSubmitOrder").click(function () {
         submitOrder();
+    });
+
+    $("#btnPrintOrder").click(function () {
+        onPrintClicked();
     });
 
 });
@@ -102,7 +107,7 @@ function removeActiveProductOrder(id) {
 
 function saleOrderItem(id, name, price, qty) {
     var item =
-        '<div class="sale-order-item">' +
+        '<div class="sale-order-item" data-name="' + name + '" data-price="' + price + '" data-qty="' + qty + '">' +
         '<div class="d-flex">' +
         '<div class="sale-order-product-name">' +
         '<h6>' + name + '</h6>' +
@@ -134,4 +139,19 @@ function submitOrder() {
     $("#saleOrderList").val(_value);
 
     $("#formSubmitOrder").submit();
+}
+
+function onPrintClicked() {
+    // print();
+    $('#saleOrderItem').children().each(function () {
+        var _name = $(this).attr("data-name");
+        var _price = $(this).attr("data-price");
+        var _qty = $(this).attr("data-qty");
+
+        var saleOrderItem = { name: _name, price: parseFloat(_price), qty: parseFloat(_qty) };
+
+        listSaleOrderItem.push(saleOrderItem);
+    });
+
+    console.log(listSaleOrderItem);
 }

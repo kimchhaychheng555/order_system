@@ -77,3 +77,6 @@ li.page-item {
     align-items: center;
     justify-content: center;
 }
+#btnClickUpload {
+    cursor: pointer;
+}
