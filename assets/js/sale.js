@@ -153,5 +153,19 @@ function onPrintClicked() {
         listSaleOrderItem.push(saleOrderItem);
     });
 
-    console.log(listSaleOrderItem);
+
+
+    var _grandTotal = 0;
+    for (var i = 0; i < listSaleOrderItem.length; i++) {
+        _grandTotal += (listSaleOrderItem[i].qty * listSaleOrderItem[i].price);
+        var element_print = "<tr><td>" + listSaleOrderItem[i].name + "</td><td>" + listSaleOrderItem[i].qty + "</td><td>" + listSaleOrderItem[i].price + "</td><td>" + (listSaleOrderItem[i].qty * listSaleOrderItem[i].price) + "</td></tr>";
+        $("#table_body").append(element_print);
+    }
+
+    $("#tfootGrandTotal").text(_grandTotal);
+    // listSaleOrderItem.each(function () {
+    //     var element_print = "<h2>Hello Testing</h2>";
+    //     $("#table_body").append(element_print);
+    // });
+    print();
 }

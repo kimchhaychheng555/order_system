@@ -67,7 +67,11 @@ class ApplicationComponent
             <td>' . $sale_number . '</td>
             <td>' . $total_qty . '</td>
             <td>' . $price . '</td>
-            <td></td>
+            
+            <td class="text-right">
+                <button type="button" class="btn btn-table-action btn-warning edit-btn-table"><i class="fas fa-pen"></i></button>
+                <button type="button" class="btn btn-table-action btn-danger delete-btn-table"><i class="fas fa-trash-alt"></i></button>
+            </td>
             
         </tr>';
     }

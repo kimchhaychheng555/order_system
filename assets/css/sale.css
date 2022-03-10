@@ -179,3 +179,52 @@
     color: #b7b7b7;
     font-size: 25px;
 }
+
+
+
+/* Print Mode CSS */
+@media print {
+
+    #bodyContent {
+        display: none;
+    }
+    
+    .print_wrp {
+        display: block !important;
+    }
+  
+  }
+
+/* Print CSS Style */
+.print_wrp {
+    max-width: 600px;
+    text-align: center;
+    margin: auto;
+}
+
+.print_wrp table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.print_wrp table td:first-child {
+    text-align: left;
+}
+
+.print_wrp table td:last-child {
+    text-align: right;
+}
+
+.print_wrp table td {
+    padding: 5px;
+}
+
+.print_wrp thead tr {
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
+.print_wrp tfoot tr:first-child {
+    border-top: 1px solid black;
+}
