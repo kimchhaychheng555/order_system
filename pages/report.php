@@ -50,6 +50,7 @@ $numberOfPage = ceil($_countable / $paging);
     <title>Products - <?php echo $appName; ?></title>
     <link rel="stylesheet" href="../assets/css/default.css">
     <link rel="stylesheet" href="../assets/css/product.css">
+    <link rel="stylesheet" href="../assets/css/report.css">
 </head>
 
 <body>
@@ -59,7 +60,8 @@ $numberOfPage = ceil($_countable / $paging);
             <h6 class="app-bar-name">Products</h6>
         </div>
         <div class="right-side">
-
+            <button type="button" class="btn btn-table-action btn-warning edit-btn-table" data-toggle="modal"
+                data-target="#viewReportModal"><i class="fas fa-eye"></i></button>
         </div>
     </div>
     <div class="wrap-main ">
@@ -109,7 +111,7 @@ $numberOfPage = ceil($_countable / $paging);
                                                         $total_qty = $row['quantity'];
                                                         $total_price = $row['grand_total'];
 
-                                                        $appCom->ComReportList($no, $sale_number, $total_qty, $total_price);
+                                                        $appCom->ComReportList($row['id'], $no, $sale_number, $total_qty, $total_price);
                                                         $i++;
                                                     }
                                                 } else {
@@ -178,6 +180,65 @@ $numberOfPage = ceil($_countable / $paging);
                                 </nav>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Modal -->
+
+            <div class="modal fade" id="viewReportModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="print_wrp">
+                            <h3>Phum Software</h3>
+                            <p>Receipt #P-00001</p>
+                            <div style="height: 10px;"></div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td>Description</td>
+                                        <td>Price</td>
+                                        <td>Qty</td>
+                                        <td>Amt</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Coca Cola</td>
+                                        <td>3.2</td>
+                                        <td>2</td>
+                                        <td>6.4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coca Cola</td>
+                                        <td>3.2</td>
+                                        <td>2</td>
+                                        <td>6.4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coca Cola</td>
+                                        <td>3.2</td>
+                                        <td>2</td>
+                                        <td>6.4</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; font-weight: bold;">Grand Total</td>
+                                        <td colspan="2" style=" font-weight: bold;">4.30</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" style="text-align: center;">
+                                            Thank You! See you again!
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

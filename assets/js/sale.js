@@ -142,6 +142,9 @@ function submitOrder() {
 }
 
 function onPrintClicked() {
+    listSaleOrderItem = [];
+    $("#table_body").html("");
+
     // print();
     $('#saleOrderItem').children().each(function () {
         var _name = $(this).attr("data-name");
@@ -163,9 +166,6 @@ function onPrintClicked() {
     }
 
     $("#tfootGrandTotal").text(_grandTotal);
-    // listSaleOrderItem.each(function () {
-    //     var element_print = "<h2>Hello Testing</h2>";
-    //     $("#table_body").append(element_print);
-    // });
+
     print();
 }

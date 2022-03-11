@@ -53,7 +53,7 @@ class ApplicationComponent
         </tr>';
     }
 
-    static function ComReportList($no, $sale_number, $total_qty, $total_price)
+    static function ComReportList($id, $no, $sale_number, $total_qty, $total_price)
     {
         include('config.php');
         $price = '$ ' . number_format($total_price, 2, '.', ',');
@@ -69,8 +69,8 @@ class ApplicationComponent
             <td>' . $price . '</td>
             
             <td class="text-right">
-                <button type="button" class="btn btn-table-action btn-warning edit-btn-table"><i class="fas fa-pen"></i></button>
-                <button type="button" class="btn btn-table-action btn-danger delete-btn-table"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-table-action btn-warning edit-btn-table" data-id="' . $id . '"><i class="fas fa-eye"></i></button>
+                <button type="button" class="btn btn-table-action btn-danger delete-btn-table" data-id="' . $id . '"><i class="fas fa-trash-alt"></i></button>
             </td>
             
         </tr>';
