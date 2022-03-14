@@ -11,7 +11,7 @@ $dbPassword = "123456";
 $dbDatabase = "order_system";
 
 // App Setting
-$root = "http://localhost/application/order_system";
+$root = "http://localhost/application/order_system/";
 $appName = "POS System";
 
 

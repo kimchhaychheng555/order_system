@@ -26,7 +26,7 @@ $query = "
         quantity
     FROM data_sale 
     WHERE is_deleted = 0
-    ORDER BY sale_number asc
+    ORDER BY sale_number desc
     LIMIT $_limit OFFSET $_offet
     ";
 
@@ -58,10 +58,6 @@ $numberOfPage = ceil($_countable / $paging);
         <div class="left-side d-flex align-items-center">
             <span id="btn_toggle_sidebar" class="cursor-pointer"><i class="far fa-bars"></i></span>
             <h6 class="app-bar-name">Products</h6>
-        </div>
-        <div class="right-side">
-            <button type="button" class="btn btn-table-action btn-warning edit-btn-table" data-toggle="modal"
-                data-target="#viewReportModal"><i class="fas fa-eye"></i></button>
         </div>
     </div>
     <div class="wrap-main ">
@@ -194,7 +190,7 @@ $numberOfPage = ceil($_countable / $paging);
                     <div class="modal-content">
                         <div class="print_wrp">
                             <h3>Phum Software</h3>
-                            <p>Receipt #P-00001</p>
+                            <p>Receipt #<span id="printReceiptNumber"></span></p>
                             <div style="height: 10px;"></div>
                             <table>
                                 <thead>
@@ -228,8 +224,15 @@ $numberOfPage = ceil($_countable / $paging);
                                 <tfoot>
                                     <tr>
                                         <td></td>
+                                        <td style="text-align: left; font-weight: bold;">Total Quantity</td>
+                                        <td colspan="2" style=" font-weight: bold;"><span
+                                                id="printReceiptTotalQty"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
                                         <td style="text-align: left; font-weight: bold;">Grand Total</td>
-                                        <td colspan="2" style=" font-weight: bold;">4.30</td>
+                                        <td colspan="2" style=" font-weight: bold;"><span
+                                                id="printReceiptGrandTotal"></span></td>
                                     </tr>
                                     <tr>
                                         <td colspan="4" style="text-align: center;">
@@ -256,11 +259,10 @@ $numberOfPage = ceil($_countable / $paging);
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/jquery.number.min.js"></script>
 <script src="../assets/js/mdb/mdb.min.js"></script>
 <script src="../assets/js/default.js"></script>
-
-
-<script src="../assets/js/jquery.number.min.js"></script>
+<script src="../assets/js/report.js"></script>
 
 
 
