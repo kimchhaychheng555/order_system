@@ -11,7 +11,7 @@ class ApplicationComponent
         echo "
                 <div class='product product_item' data-id='$id' data-product-name='$productName' data-product-price='$productPrice', data-product-image='$productImage'>
                     <div class='product-image'>
-                        <img src='$root$image'
+                        <img src='$root/$image'
                             alt=''>
                         <div class='product-price'>
                             <h6>$price</h6>
@@ -28,7 +28,7 @@ class ApplicationComponent
     {
         include('config.php');
         $price = '$ ' . number_format($productPrice, 2, '.', ',');
-        $image = (($productImage ??  "") == "") ? "$root/images/no_image.png" : $root . $productImage;
+        $image = (($productImage ??  "") == "") ? "$root/images/no_image.png" : "$root/$productImage";
         $data_value = "data-id='$productCode'";
 
         $data_edit = "data-product-code='$productCode' data-product-image='$productImage' data-product-price='$productPrice' data-product-name='$productName'";
@@ -69,8 +69,8 @@ class ApplicationComponent
             <td>' . $price . '</td>
             
             <td class="text-right">
-            <button type="button" class="btn btn-table-action btn-warning viewReportModal" data-toggle="modal" data-target="#viewReportModal" data-id="' . $id . '"><i class="fas fa-eye"></i></button>
-                <button type="button" class="btn btn-table-action btn-danger delete-btn-table" data-id="' . $id . '"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-table-action btn-warning viewReportModal" data-toggle="modal" data-target="#viewReportModal" data-id="' . $id . '"><i class="fas fa-eye"></i></button>
+                <button type="button" class="btn btn-table-action btn-danger deleteReportModal" data-toggle="modal" data-target="#delete_sale" data-id="' . $id . '" data-sale-number="' . $sale_number . '"><i class="fas fa-trash-alt"></i></button>
             </td>
             
         </tr>';

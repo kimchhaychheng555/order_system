@@ -7,6 +7,20 @@ include('../menu-sidebar.php');
 $appFunction = new ApplicationFunction();
 $appFunction->checkCurrentLoginUser();
 
+/// Delete Report
+if (isset($_POST["delete_sale"])) {
+    $saleId = ($_POST["delete_sale_id"]);
+
+
+    /// Delete Sale Product
+    $query = "delete from data_sale_product where sale_id = '$saleId'";
+    $dbConn->query($query);
+
+    // Delete SAle
+    $query = "delete from data_sale where id = '$saleId'";
+    $dbConn->query($query);
+}
+
 
 // Pagination Structure ======================================================
 
@@ -242,6 +256,32 @@ $numberOfPage = ceil($_countable / $paging);
                                 </tfoot>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Delete Modal -->
+            <div class="modal fade confirm_modal" id="delete_sale" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Delete Report #<span id="deleteReportNumber"></span></h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="confirm-modal-delete-icon">
+                                    <i class="fal fa-times-circle text-danger"></i>
+                                </div>
+                                <input type="text" id="input_sale_id" value="" name="delete_sale_id" hidden>
+                                <p class="text-center">Are you sure ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger" name="delete_sale">Delete</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -20,4 +20,12 @@ $(".viewReportModal").click(function () {
             }
         }
     });
+});
+
+
+$(".deleteReportModal").click(function () {
+    var id = $(this).attr("data-id");
+    var saleNumber = $(this).attr("data-sale-number");
+    $("#deleteReportNumber").html(saleNumber);
+    $("#input_sale_id").val(id);
 })
