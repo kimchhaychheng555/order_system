@@ -7,11 +7,11 @@
 
 $dbServerName = "localhost";
 $dbUsername = "root";
-$dbPassword = "123456";
-$dbDatabase = "order_system";
+$dbPassword = "";
+$dbDatabase = "db_order_system";
 
 // App Setting
-$root = "http://localhost/application/order_system";
+$root = "http://localhost/website/application/order_system";
 $appName = "POS System";
 
 

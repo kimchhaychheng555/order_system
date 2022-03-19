@@ -37,7 +37,7 @@ $(document).ready(function () {
         var product_price = $(this).attr("data-product-price");
 
         $("#modify_product_code").val(product_code);
-        $("#modify_profile_img").attr("src", product_image);
+        $("#modify_profile_img").attr("src", "http://localhost/website/application/order_system/"+product_image);
         $("#modify_product_name").val(product_name);
         $("#modify_product_price").val(product_price);
     });
