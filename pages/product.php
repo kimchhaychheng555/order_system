@@ -71,7 +71,7 @@ if (isset($_POST["modify_product"])) {
             product_name='$name', 
             product_price='$price', 
             product_image = '$image' 
-            WHERE product_code = '$code'";
+            WHERE id = '$code'";
     $resp = $dbConn->query($query);
     if ($resp) {
         // Success
@@ -83,7 +83,7 @@ if (isset($_POST["delete_product"])) {
     $code = $_POST['delete_product_code'];
 
     $query = "UPDATE data_product SET
-                is_deleted = 1 WHERE product_code = '$code'";
+                is_deleted = 1 WHERE id = '$code'";
     $resp = $dbConn->query($query);
     if ($resp) {
         // Success
@@ -95,7 +95,7 @@ if (isset($_POST["restore_product"])) {
     $code = $_POST['restore_product_code'];
 
     $query = "UPDATE data_product SET
-                is_deleted = 0 WHERE product_code = '$code'";
+                is_deleted = 0 WHERE id = '$code'";
     $resp = $dbConn->query($query);
     if ($resp) {
         // Success
@@ -115,6 +115,7 @@ $_limit = ($paging);
 $_offet = (($pager - 1) * $paging);
 $query = "
     SELECT 
+        id,
         product_code, 
         product_name, 
         product_price, 
@@ -210,12 +211,13 @@ $numberOfPage = ceil($_countable / $paging);
 
                                                     while ($row = $dataResult->fetch_assoc()) {
                                                         $no = ($i + $_offet);
+                                                        $product_id = $row['id'];
                                                         $product_code = $row['product_code'];
                                                         $product_name = $row['product_name'];
                                                         $product_price = $row['product_price'];
                                                         $product_image = $row['product_image'];
 
-                                                        $appCom->ComProductList($no, $product_image, $product_code, $product_name, $product_price);
+                                                        $appCom->ComProductList($product_id, $no, $product_image, $product_code, $product_name, $product_price);
                                                         $i++;
                                                     }
                                                 } else {

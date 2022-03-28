@@ -24,12 +24,12 @@ class ApplicationComponent
         ";
     }
 
-    static function ComProductList($no, $productImage, $productCode, $productName,  $productPrice)
+    static function ComProductList($id, $no, $productImage, $productCode, $productName,  $productPrice)
     {
         include('config.php');
         $price = '$ ' . number_format($productPrice, 2, '.', ',');
         $image = (($productImage ??  "") == "") ? "$root/images/no_image.png" : "$root/$productImage";
-        $data_value = "data-id='$productCode'";
+        $data_value = "data-id='$id'";
 
         $data_edit = "data-product-code='$productCode' data-product-image='$productImage' data-product-price='$productPrice' data-product-name='$productName'";
 
